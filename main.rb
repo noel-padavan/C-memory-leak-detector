@@ -1,6 +1,6 @@
 #gem
-require 'rainbow'      
-
+require 'rainbow' 
+   
 #get my queue data structure
 require './DataStructs/queue.rb'
 
@@ -18,16 +18,23 @@ end
 
 def main
 
+    if (ARGV.length == 0) 
+        raise "Error: no path to C file provided."
+    elsif (File.file?(ARGV[0]) == false) 
+        raise "Error: entered file does not exist."
+    end
+
     c_file = File.open(ARGV[0])
     c_file_data = c_file.readlines
 
-    puts Rainbow("\n FILE CONTENTS: \n").bg(:lime).black.bold
+    puts Rainbow("\t\t\t\t\t\t\t\t ").underline.lime
+    puts Rainbow("|\t\t\tFILE CONTENTS:").lime.bold.underline + Rainbow("\t\t\t\t|\n").lime.bold.underline 
 
     line_num = 1
     for line in c_file_data
     
         if line.include? "calloc" or line.include? "malloc"
-            puts Rainbow("#{line_num}:\t").yellow + Rainbow("#{line}").blue 
+            puts Rainbow("#{line_num}:\t").yellow + Rainbow("#{line}").purple 
         elsif line.include? "free" and line.include?("//") == false and line.include?("/*") == false
             puts Rainbow("#{line_num}:\t").yellow + Rainbow("#{line}").green
         else    
@@ -36,8 +43,6 @@ def main
 
         line_num += 1
     end 
-    
-    puts Rainbow("\t\t\t\t\t\t\t\t").underline
 
     pointer_name_queue = Queue.new
 
@@ -46,6 +51,10 @@ def main
         if line.include? "calloc" or line.include? "malloc" and line.include?("//") == false and line.include?("/*") == false
             word_array = line.split(" ")
             pointer_name = word_array[1]
+
+            if pointer_name.include?("*") 
+                pointer_name = pointer_name[1, pointer_name.length - 1]
+            end 
 
             # for now make a call to is_mem_freed? function here but later replace with a call queue or stack
 
@@ -61,9 +70,11 @@ def main
     end
 
     if pointer_name_queue.size == 0
-        puts Rainbow("\nNo memory leaks!\n").bg(:lime).black.bold
+        puts Rainbow("\n\t\t\t\t\t\t\t\t ").underline.lime
+        puts Rainbow("|\t\t\tNO MEMORY LEAKS").lime.bold.underline + Rainbow("\t\t\t\t|\n").lime.bold.underline 
     else 
-        puts Rainbow("\nMEMORY LEAKS\n").bg(:red).bold.white
+        puts Rainbow("\n\t\t\t\t\t\t\t\t ").underline.red
+        puts Rainbow("|\t\t\tMEMORY LEAKS:").red.bold.underline + Rainbow("\t\t\t\t|\n").red.bold.underline 
         while (pointer_name_queue.isEmpty == false) 
             data_array = pointer_name_queue.remove()
             pointer_name = data_array[1]

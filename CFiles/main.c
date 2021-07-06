@@ -1,26 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// import the linkedList structs and functions from header
+#include "linkedList.h"
+
+
 int main(int argc, char const *argv[])
 {
-    
-    int size = 10;
+    LinkedList* list = innit_list();
 
-    int* arr = (int*)calloc(size, sizeof(int));
-    int* arr2 = (int*)calloc(size, sizeof(int));
+    add(list, 1);
+    add(list, 2);
+    add(list, 3);
+    add(list, 4);
+    add(list, 5);
+
+    addFirst(list, 0);
+    addFirst(list, -1);
+    addFirst(list, -2);
+    addFirst(list, -3);
+
+    printAll(list);
+    printf("\nLIST SIZE: %d\n", size(list));
+
+    printf("\nData @ head: %d\nData @ tail: %d\n", getFirst(list), getLast(list));
 
 
-    for (int i = 0; i < size; i++) {
-        arr[i] = i + 1;
-    }
+    int num;
 
-    for (int i = 0; i < size; i++) {
-        printf("Number @ index [%d] -> %d\n", i, arr[i]);
-    }
+    printf("Enter number to search for in list: ");
+    scanf("%d", &num);
 
-
-    //free(arr);
-    //free(arr2);
+    printf("\nDoes the list contain the number %d: %d\n", num, contains(list, num));
 
 
     return 0;

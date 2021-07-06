@@ -85,6 +85,4 @@ end
 
 =end
 
-
-
 c_file.close
