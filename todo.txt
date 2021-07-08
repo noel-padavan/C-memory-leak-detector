@@ -1,0 +1,9 @@
+user should be able to give their own allocation functions as argv commands
+
+example of a call to program should be something like:
+
+ruby main.rb NAME_OF_C_FILE -af allocationFunction1 allocationFunction2 allocationFunctionN -df deallocationFunction1 deallocationFunction2 deallocationFunctionN
+
+where flags -af is for allocation function and -df is for de-allocation function
+
+these may be custom methods that the user has written.
