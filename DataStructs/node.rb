@@ -1,3 +1,5 @@
+# typed: ignore
+
 class Node
     def initialize(data)
         @data = data

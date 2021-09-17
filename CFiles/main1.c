@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "allocFunc.h"
 
 int main(int argc, char const *argv[])
 {
     
     int size = 10;
 
-    int* arr = (int*)calloc(size, sizeof(int));
+    char* arr = (char*)calloc(size, sizeof(char));
     int *arr2 = (int*)malloc(size * sizeof(int));
+
+    int* arr3 = new_array();
 
 
     for (int i = 0; i < size; i++) {
@@ -19,8 +22,8 @@ int main(int argc, char const *argv[])
     }
 
 
-    free(arr);
-    //free(arr2);
+    //free(arr);
+    free(arr2);
 
 
     return 0;
