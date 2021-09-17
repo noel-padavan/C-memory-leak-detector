@@ -1,3 +1,5 @@
+# typed: ignore
+
 require './DataStructs/node.rb'
 
 class Queue
