@@ -2,6 +2,9 @@
 
 A simple, bare-bones memory leak detector for C. Written with Ruby.
 
+## example run
+<img width="2640" alt="Screen Shot 2021-10-04 at 10 34 47 AM" src="https://user-images.githubusercontent.com/70342060/135870752-8e877062-a58c-47c8-af7b-d880fc389a8b.png">
+
 ## Important note
 
 Keep in mind that this is an EXTREMLEY basic memory leak detector intended to be used by people just learning about memory allocations in C. 
