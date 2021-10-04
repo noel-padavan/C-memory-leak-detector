@@ -85,13 +85,13 @@ module MemoryLeakTool
             
             elsif (ARGV.include?("-caf"))
             
-                puts Rainbow("\nHas custom allocation functions ✔️\n").yellow.bold
+                puts Rainbow("\nHas custom allocation functions ✔️\n").green.bold.italic
                 caf = ARGV[ARGV.find_index("-caf") + 1, ARGV.length]
-                puts Rainbow("Custom allocation functions given: ").yellow
+                puts Rainbow("Custom allocation functions given: ").indianred.bold.italic
                 puts caf
             
             elsif (ARGV.include?("-cdf") == false and ARGV.include?("-caf") == false)
-                puts "\nNO custom allocation AND deallocation functions given, using default malloc and calloc..."
+                puts Rainbow("\nNO custom allocation AND deallocation functions given, using default malloc and calloc...").yellow.bold
             else
                 puts "Invalid arg(s)"
             end
@@ -139,7 +139,7 @@ module MemoryLeakTool
             end
 
             # highlight lines with custom allocation/deallocation funcntion calls
-            
+            # kind of buggy, starts highlighting mutli-line comments that contains words such as free
             if line.include? "calloc" or line.include? "malloc" or foundCAFcall
                 print Rainbow("#{line_num}:\t").yellow.bold + Rainbow("#{line}").yellow 
             elsif line.include? "free" or foundCDFcall and line.include?("//") == false and line.include?("/*") == false
@@ -245,7 +245,7 @@ module MemoryLeakTool
                 line_number = data_array[0]
                 puts "- " + Rainbow("Line: #{line_number}").red.bold + " pointer with reference name: " + Rainbow("#{pointer_name}").underline.bold + " was allocated but never freed"
             end
-            puts "- " + Rainbow("Approximate memory leak size ≈ ").red.bold + Rainbow("#{@total_memory_loss_BYTES} bytes").yellow.bold
+            puts "\n- " + Rainbow("Approximate memory leak size").red.bold + " ≈ " + Rainbow("#{@total_memory_loss_BYTES} bytes").yellow.bold
         end
         puts "\n\n"
     end
