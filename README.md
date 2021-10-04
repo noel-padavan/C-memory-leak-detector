@@ -15,6 +15,13 @@ If you are learning about making memory allocations in C with calls to `malloc()
 
 ## How to Run
 
+***Read this:*** You will need Ruby installed on your computer. If you do then follow the below steps:
+1. clone this repo
+2. cd to it in your terminal
+3. type `bundle install` in the project directory
+4. cd to `lib` folder
+5. Follow the commands below to run
+
 The memory leak detector is a command line tool. Simple enter `ruby main.rb [path to C file to scan]` and the program will output the result of the search for leaks. If you have custom allocation and/or deallocation function anmes use the following flags when running the command mentioned before in the terminal. 
 
 - Flag to add custom allocation function name(s): `-caf [name of custom allocation function 1] [name of custom allocation function 2] [name of custom allocation function .....]`
